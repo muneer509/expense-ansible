@@ -4,7 +4,7 @@
   become: yes
   vars:
     mysql_root_password: ExpenseApp@1
-    login_host: mysql.mxyz.shop
+    login_host: localhost
   tasks:
   - name: pip installlation
     ansible.builtin.package:
