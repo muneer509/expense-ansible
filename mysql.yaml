@@ -1,49 +1,54 @@
-- name: mysql configuartion
+
+- name: MySQL Configuration
   hosts: localhost
   connection: local
   become: yes
   vars:
     mysql_root_password: ExpenseApp@1
     login_host: localhost
+    ansible_python_interpreter: /usr/bin/python3
   tasks:
-  - name: pip installlation
-    ansible.builtin.package:
-      name: 
-        - python3
-        - python3-pip
-      state: present
+    - name: Install Python and pip
+      ansible.builtin.package:
+        name:
+          - python3
+          - python3-pip
+        state: present
 
-  - name: pymysql installation
-    ansible.builtin.pip:
-      name:
-      - PyMySQL
-      executable: pip3
-  - name: mysql installation
-    ansible.builtin.package:
-      name: mysql-server
-      state: present
-  # - name: start mysql
-  #   ansible.builtin.service:
-  #     name: start mysqld
-  #     state: restarted
+    - name: Install PyMySQL
+      ansible.builtin.pip:
+        name:
+          - PyMySQL
+        executable: pip3
 
-  - name: connect mysql server
-    community.mysql.mysql_info:
-      login_user: root
-      login_password: "{{ mysql_root_password }}"
-      login_host: "{{ login_host }}"
-    ignore_errors: true
-    register: mysql_info
+    - name: Install MySQL server
+      ansible.builtin.package:
+        name: mysql-server
+        state: present
 
-  - name: print mysql mysql_info
-    ansible.builtin.debug:
-      msg: "{{ mysql_info }}"
-  
-  - name: Set MySQL root password
-    mysql_user:
-      name: root
-      host: localhost
-      password: "ExpenseApp@1"
-      login_unix_socket: /var/lib/mysql/mysql.sock
-      check_implicit_admin: yes
-      state: present
+    - name: Start MySQL service
+      ansible.builtin.service:
+        name: mysqld
+        state: started
+        enabled: yes
+
+    - name: Connect to MySQL server
+      community.mysql.mysql_info:
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+        login_host: "{{ login_host }}"
+      ignore_errors: true
+      register: mysql_info
+
+    - name: Print MySQL info
+      ansible.builtin.debug:
+        msg: "{{ mysql_info }}"
+
+    - name: Set MySQL root password
+      community.mysql.mysql_user:
+        name: root
+        host: localhost
+        password: "{{ mysql_root_password }}"
+        login_unix_socket: /var/lib/mysql/mysql.sock
+        check_implicit_admin: yes
+        state: present
