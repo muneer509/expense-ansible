@@ -1,10 +1,16 @@
 - name: mysql configuartion
-  hosts: mysql
+  hosts: localhost
+  connection: local
   become: yes
   vars:
     mysql_root_password: ExpenseApp@1
     login_host: mysql.mxyz.shop
   tasks:
+  - name: pip installlation
+    ansible.builtin.package:
+      name: python3-pip
+      state: present
+
   - name: pymysql installation
     ansible.builtin.pip:
       name:
