@@ -8,8 +8,7 @@
   - name: pymysql installation
     ansible.builtin.pip:
       name:
-      - boto3
-      - botocore
+      - pymysql
       excutable: pip3.9
   - name: mysql installation
     ansible.builtin.package:
