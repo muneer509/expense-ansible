@@ -9,10 +9,10 @@
     ansible.builtin.package:
       name: mysql-server
       state: present
-  - name: start mysql
-    ansible.builtin.service:
-      name: start mysqld
-      state: restarted
+  # - name: start mysql
+  #   ansible.builtin.service:
+  #     name: start mysqld
+  #     state: restarted
 
   - name: connect mysql server
     community.mysql.mysql_info:
