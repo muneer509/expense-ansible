@@ -5,6 +5,12 @@
     mysql_root_password: ExpenseApp@1
     login_host: mysql.mxyz.shop
   tasks:
+  - name: pymysql installation
+    ansible.builtin.pip:
+      name:
+      - boto3
+      - botocore
+      excutable: pip3.9
   - name: mysql installation
     ansible.builtin.package:
       name: mysql-server
