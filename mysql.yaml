@@ -9,5 +9,5 @@
   - name: start mysql
     ansible.builtin.service:
       name: start mysqld
-      state: restrted
+      state: restarted
 
