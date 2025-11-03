@@ -14,8 +14,11 @@
   tasks:
   - name: Install boto3 using pip
     ansible.builtin.pip:
-      name: boto3
+      name: 
+      - boto3
+      - botocore
       executable: pip3
+  
   
 
   - name: create ec2 for mysql
