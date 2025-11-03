@@ -30,7 +30,7 @@
   
   - name: print the ec2-info
     ansible.builtin.debug:
-      msg: "{{ ec2_-nstances-info}}"
+      msg: "{{ ec2-instances-info }}"
 
   # - name: create record
   #   amazon.aws.route53:
