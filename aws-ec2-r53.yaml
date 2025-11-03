@@ -13,10 +13,8 @@
 
   tasks:
   - name: install boto3 and botocore
-    ansible.builtin.package:
-      name: 
-      - boto3
-      - botocore
+    ansible.builtin.pip:
+      name: boto3
       force_apt_get: yes
   
 
@@ -24,7 +22,7 @@
     amazon.aws.ec2_instance:
       name: "{{ item }}"
       vpc_subnet_id: "{{ subnet_id }}"
-      instance_type: "t3.micro"
+      instance_type: "t3.micro" 
       security_group: "{{ sg_id }}"
       image_id: "{{ image_id }}"
     loop: instances
