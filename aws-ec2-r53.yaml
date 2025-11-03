@@ -12,10 +12,10 @@
     zone: mxyz.shop
 
   tasks:
-  - name: install boto3 and botocore
+  - name: Install boto3 using pip
     ansible.builtin.pip:
       name: boto3
-      force_apt_get: yes
+      executable: pip3
   
 
   - name: create ec2 for mysql
