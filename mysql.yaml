@@ -28,14 +28,14 @@
     
     - name: Start MySQL service
       service:
-        name: mysqld
+        name: mysql
         state: started
         enabled: yes
 
 
     - name: Start MySQL service
       ansible.builtin.service:
-        name: mysqld
+        name: mysql
         state: started
         enabled: yes
 
