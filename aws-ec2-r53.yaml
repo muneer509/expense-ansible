@@ -8,6 +8,7 @@
 
     instances:
     - mysql
+    - backend
 
     zone: mxyz.shop
 
