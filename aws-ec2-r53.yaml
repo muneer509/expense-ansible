@@ -26,11 +26,11 @@
       security_group: "{{ sg_id }}"
       image_id: "{{ image_id }}"
     loop: instances
-    register: ec2-instances-info
+    register: ec2_instances_info
   
   - name: print the ec2-info
     ansible.builtin.debug:
-      msg: "{{ ec2-instances-info }}"
+      msg: "{{ ec2_instances_info }}"
 
   # - name: create record
   #   amazon.aws.route53:
