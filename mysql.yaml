@@ -12,3 +12,10 @@
       ansible.builtin.package:
         name: mysql-server
         state: present
+    
+  tasks:
+    - name: start mysql-server
+      ansible.builtin.service:
+        name: mysqld
+        state: started
+        enabled: yes
