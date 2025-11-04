@@ -36,14 +36,14 @@
     ansible.builtin.debug:
       msg: "{{ ec2_instances_info }}"
 
-  # - name: create record
-  #   amazon.aws.route53:
-  #     state: present
-  #     zone: "{{ zone }}"
-  #     record: "{{ item.item }}.{{ zone }}"
-  #     type: A
-  #     ttl: 1
-  #     value: "{{ item.instances[0].private }}"
-  #     wait: true
-  #     overwrite: true
-  #   loop: "{{ ec2-instances-info.}}"
+  - name: create record
+    amazon.aws.route53:
+      state: present
+      zone: "{{ zone }}"
+      record: "{{ item.item }}.{{ zone }}"
+      type: A
+      ttl: 1
+      value: "{{ item.instances[0].private }}"
+      wait: true
+      overwrite: true
+    loop: "{{ ec2-instances-info.}}"
