@@ -46,4 +46,4 @@
       value: "{{ item.instances[0].private }}"
       wait: true
       overwrite: true
-    loop: "{{ ec2-instances-info.}}"
+    loop: "{{ ec2-instances-info }}"
