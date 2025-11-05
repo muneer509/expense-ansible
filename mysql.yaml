@@ -4,7 +4,7 @@
 
   vars:
     mysql_root_password: ExpenseApp@1
-    login_host: mysq.mxyz.shop
+    login_host: mysql.mxyz.shop
     login_user: root 
     
 
