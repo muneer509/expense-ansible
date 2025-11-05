@@ -7,7 +7,7 @@
     login_host: mysq.mxyz.shop
     login_user: root 
     
-    
+
   tasks:
   - name: install MYSQL server
     ansible.builtin.package:
@@ -25,6 +25,7 @@
       login_user: "{{ login_user }}"
       login_password: "{{ mysql_root_password }}"
       login_host: "{{ login_host }}"
+    ignore_errors: true
     register: mysql_info
 
   - name:
