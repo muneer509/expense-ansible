@@ -6,7 +6,8 @@
     mysql_root_password: ExpenseApp@1
     login_host: mysq.mxyz.shop
     login_user: root 
-    login_
+    
+    
   tasks:
   - name: install MYSQL server
     ansible.builtin.package:
