@@ -43,5 +43,5 @@
       value: "{{ item.instances[0].public_ip_address }}"
       wait: true
       overwrite: true
-    loop: "{{ ec2_instances.results }}"
+    loop: "{{ ec2_instances_info.results }}"
     when: item.item == "frontend" #when keyword should not have {{}}
