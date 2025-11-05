@@ -6,7 +6,7 @@
     - mysql
     vpc_id: "vpc-06877294a65fc932d"
     subnet_id: "subnet-03f6a20a70a34abc8"
-    sg_id: "subnet-03f6a20a70a34abc8"
+    sg_id: "sg-0670763c62c77ba9b"
     image_id: "ami-09c813fb71547fc4f"
 
 
