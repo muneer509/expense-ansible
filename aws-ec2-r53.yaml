@@ -8,7 +8,7 @@
     subnet_id: "subnet-03f6a20a70a34abc8"
     sg_id: "sg-0670763c62c77ba9b"
     image_id: "ami-09c813fb71547fc4f"
-
+    zone: mxyz.shop
 
   tasks: 
 
@@ -32,3 +32,16 @@
   - name: print ec2 output
     ansible.builtin.debug:
       msg: "{{ ec2_instances_info }}"
+    
+  - name: create r53 private records
+    amazon.aws.route53:
+      state: present
+      zone: "{{ zone }}"
+      record: "{{ item.item }}.{{ zone }}" # item.item= mysql
+      type: A
+      ttl: 1
+      value: "{{ item.instances[0].private_ip_address }}"
+      wait: true
+      overwrite: true
+    loop: "{{ ec2_instances.results }}"
+
