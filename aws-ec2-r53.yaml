@@ -1,5 +1,5 @@
 - name: ec2and r53 creation using ansible
-  hosts: localhost
+  hosts: local
 
   vars:
     instances:
