@@ -20,7 +20,7 @@
       loop:
       - nodejs
       - mysql
-      - - cryptography
+      - cryptography
 
     - name: ansible to install pymysql
       ansible.builtin.pip:
