@@ -72,4 +72,4 @@
         login_password: "{{ mysql_root_password }}"
         target: /app/schema/backend.sql
         name: all
-        state: dump
+        state: import
