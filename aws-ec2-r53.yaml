@@ -44,7 +44,7 @@
       value: "{{ item.instances[0].private_ip_address }}"
       wait: true
       overwrite: true
-    loop: "{{ ec2_instances.results }}"
+    loop: "{{ ec2_instances_info.results }}"
 
   - name: create r53 public record for frontend
     amazon.aws.route53:
@@ -56,5 +56,5 @@
       value: "{{ item.instances[0].public_ip_address }}"
       wait: true
       overwrite: true
-    loop: "{{ ec2_instances.results }}"
+    loop: "{{ ec2_instances_info.results }}"
     when: item.item == "frontend"
