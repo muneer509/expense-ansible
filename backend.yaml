@@ -1,6 +1,11 @@
 - name: backend module
   hosts: backend
   become: yes
+  vars:
+    mysql_root_password: ExpenseApp@1
+    login_host: mysql.mxyz.shop
+
+
   tasks:
     - name: disable defaut nodejs
       ansible.builtin.command: dnf module disable nodejs -y
@@ -33,3 +38,21 @@
         dest: /app
         remote_src: yes
 
+    - name: install dependencies
+      ansible.builtin.command: npm install
+      args:
+        chdir: /app
+      
+    - name: copy backend service to backend service to systemd/system
+      ansible.builtin.copy:
+        src: backend.service
+        dest: /etc/systemd/system/backend.service
+
+    - name: import mysql data
+      community.mysql.mysql_db:
+        login_host: "{{ login_host }}"
+        login_user: root
+        login_password: "{{ login_password }}"
+        target: /app/schema/backend.sql
+        name: all
+        state: dump
