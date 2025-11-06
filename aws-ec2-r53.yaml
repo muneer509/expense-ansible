@@ -4,7 +4,6 @@
   vars:
     instances:
     - mysql
-    - backend
     vpc_id: "vpc-06877294a65fc932d"
     subnet_id: "subnet-03f6a20a70a34abc8"
     sg_id: "sg-0670763c62c77ba9b"
@@ -34,17 +33,19 @@
     ansible.builtin.debug:
       msg: "{{ ec2_instances_info }}"
   
-  - name: private records
+  #private IP R53
+  - name: create r53 private records
     amazon.aws.route53:
       state: present
       zone: "{{ zone }}"
-      record: "{{ item.item }}.{{ zone }}"
-      type: A 
+      record: "{{ item.item }}.{{ zone }}" 
+      type: A
       ttl: 1
       value: "{{ item.instances[0].private_ip_address }}"
       wait: true
       overwrite: true
-    loop: "{{ ec2_instances_info}}"
+    loop: "{{ ec2_instances.results }}"
+
   - name: create r53 public record for frontend
     amazon.aws.route53:
       state: present
@@ -55,5 +56,5 @@
       value: "{{ item.instances[0].public_ip_address }}"
       wait: true
       overwrite: true
-    loop: "{{ ec2_instances_info.results }}"
-    when: item.item == "frontend" #when keyword should not have {{}}
+    loop: "{{ ec2_instances.results }}"
+    when: item.item == "frontend"
